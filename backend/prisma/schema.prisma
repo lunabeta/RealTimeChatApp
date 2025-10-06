@@ -8,21 +8,22 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  password  String
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
   messages  Message[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 }
 
 model Message {
   id        Int      @id @default(autoincrement())
   content   String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  room      ChatRoom @relation(fields: [roomId], references: [id])
-  roomId    Int
   createdAt DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  chatRoomId Int
+  chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [id])
 }
 
 model ChatRoom {
