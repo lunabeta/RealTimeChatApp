@@ -13,28 +13,18 @@ services:
       - db-data:/var/lib/postgresql/data
 
   backend:
-    build: ./backend
+    image: node:18-alpine  # Use Node image directly
     container_name: chat-backend
-    command: npm run start:dev
+    working_dir: /app
+    command: sh -c "npm install && npm run start:dev"
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - ./backend:/app  # Mount your backend code
     ports:
       - "5000:5000"
     depends_on:
       - db
-
-  frontend:
-    build: ./frontend
-    container_name: chat-frontend
-    command: npm run dev -- --host
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
+    environment:
+      - REDIS_URL=redis://localhost:6380
 
 volumes:
   db-data:
