@@ -1,12 +1,14 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: any) {
+    console.log('👤 UsersService.create called');
+    console.log('📥 Incoming password:', createUserDto.password);
+    
     // Check if username already exists
     const existingUser = await this.prisma.user.findUnique({
       where: { username: createUserDto.username },
@@ -16,27 +18,48 @@ export class UsersService {
       throw new ConflictException('Username already exists');
     }
 
-    // Create new user - ONLY include username field
-    return this.prisma.user.create({
+    console.log('💾 Saving password to database:', createUserDto.password);
+
+    // Create new user - NO PASSWORD HASHING HERE!
+    const newUser = await this.prisma.user.create({
       data: {
-        username: createUserDto.username,  // Only this field matches your schema
-      },
+        username: createUserDto.username,
+        password: createUserDto.password, // Already hashed by AuthService
+        email: createUserDto.email,
+      } as any,
     });
+
+    console.log('✅ User created with password:', (newUser as any).password);
+    return newUser;
   }
 
   async findAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        createdAt: true,
+      } as any,
+    });
   }
 
   async findOne(id: number) {
     return this.prisma.user.findUnique({
       where: { id },
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        createdAt: true,
+        messages: true,
+      } as any,
     });
   }
 
-  async findByUsername(username: string) {  // CHANGED from findByEmail
+  async findByUsername(username: string) {
     return this.prisma.user.findUnique({
-      where: { username },  // CHANGED from email to username
+      where: { username },
     });
   }
 }
