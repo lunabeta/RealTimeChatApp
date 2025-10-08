@@ -101,4 +101,24 @@ export class AuthService {
       },
     };
   }
+
+  // 👇 CORRECTLY PLACED googleLogin METHOD (OUTSIDE login method)
+  async googleLogin(req: any) {
+    console.log('🔐 Google Login called with:', req.user);
+    
+    if (!req.user) {
+      return { message: 'No user from Google' };
+    }
+
+    // For development - just return the Google profile
+    return {
+      message: 'Google OAuth successful! (Development Mode)',
+      profile: {
+        email: req.user.email,
+        name: `${req.user.firstName} ${req.user.lastName}`,
+        picture: req.user.picture
+      },
+      note: 'Add real Google credentials to enable full OAuth flow'
+    };
+  }
 }
