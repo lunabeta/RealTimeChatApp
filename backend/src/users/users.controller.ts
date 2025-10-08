@@ -19,4 +19,10 @@ export class UsersController {
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
+
+  // 👇 ADD THIS NEW ROUTE FOR EMAIL SEARCH
+  @Get('email/:email')
+  findByEmail(@Param('email') email: string) {
+    return this.usersService.findByEmail(email);
+  }
 }

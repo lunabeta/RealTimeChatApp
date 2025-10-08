@@ -20,11 +20,11 @@ export class UsersService {
 
     console.log('💾 Saving password to database:', createUserDto.password);
 
-    // Create new user - NO PASSWORD HASHING HERE!
+    // Create new user
     const newUser = await this.prisma.user.create({
       data: {
         username: createUserDto.username,
-        password: createUserDto.password, // Already hashed by AuthService
+        password: createUserDto.password, // Password will be hashed by AuthService
         email: createUserDto.email,
       } as any,
     });
@@ -60,6 +60,12 @@ export class UsersService {
   async findByUsername(username: string) {
     return this.prisma.user.findUnique({
       where: { username },
+    });
+  }
+
+  async findByEmail(email: string) {
+    return this.prisma.user.findFirst({
+      where: { email: email }
     });
   }
 }

@@ -19,7 +19,6 @@ export class AuthService {
     const hashedPassword = await bcrypt.hash(registerDto.password, 12);
     console.log('🔑 Hashed password:', hashedPassword);
     
-    // Create user - this returns user with all fields
     const user = await this.usersService.create({
       username: registerDto.username,
       password: hashedPassword,
@@ -28,16 +27,13 @@ export class AuthService {
 
     console.log('💾 User created with password:', (user as any).password);
     
-    // Since we used 'as any' in UsersService, we need to assert the type here
     const userWithEmail = user as any;
 
-    // Create JWT payload
     const payload = { 
       username: userWithEmail.username, 
       sub: userWithEmail.id 
     };
     
-    // Return token and user info
     return {
       access_token: this.jwtService.sign(payload),
       user: {
@@ -50,40 +46,33 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
-    console.log('🔐 Login attempt for:', loginDto.username);
+    console.log('🔐 Login attempt for email:', loginDto.email);
     
-    // Get user for authentication
-    const user = await this.usersService.findByUsername(loginDto.username);
+    // Use findByEmail for consistency with Google OAuth
+    const user = await this.usersService.findByEmail(loginDto.email);
     console.log('👤 User found:', user ? 'Yes' : 'No');
     
     if (!user) {
-      throw new UnauthorizedException('Invalid username or password');
+      throw new UnauthorizedException('Invalid email or password');
     }
 
-    // Debug: Check what fields user has
-    console.log('📋 User fields:', Object.keys(user));
-    console.log('🔑 Has password field:', 'password' in user);
-    
-    // Type assertion for password check
     const userWithPassword = user as any;
     
     if (!userWithPassword.password) {
       console.log('❌ No password field found in user object');
-      throw new UnauthorizedException('Invalid username or password');
+      throw new UnauthorizedException('Invalid email or password');
     }
 
     console.log('💾 Stored password hash:', userWithPassword.password);
     console.log('📝 Login password attempt:', loginDto.password);
 
-    // Debug password comparison
     const passwordMatches = await bcrypt.compare(loginDto.password, userWithPassword.password);
     console.log('🔐 Password matches:', passwordMatches);
     
     if (!passwordMatches) {
-      throw new UnauthorizedException('Invalid username or password');
+      throw new UnauthorizedException('Invalid email or password');
     }
 
-    // Create JWT payload
     const payload = { 
       username: userWithPassword.username, 
       sub: userWithPassword.id 
@@ -102,7 +91,6 @@ export class AuthService {
     };
   }
 
-  // 👇 CORRECTLY PLACED googleLogin METHOD (OUTSIDE login method)
   async googleLogin(req: any) {
     console.log('🔐 Google Login called with:', req.user);
     
@@ -110,15 +98,47 @@ export class AuthService {
       return { message: 'No user from Google' };
     }
 
-    // For development - just return the Google profile
-    return {
-      message: 'Google OAuth successful! (Development Mode)',
-      profile: {
-        email: req.user.email,
-        name: `${req.user.firstName} ${req.user.lastName}`,
-        picture: req.user.picture
-      },
-      note: 'Add real Google credentials to enable full OAuth flow'
-    };
+    try {
+      // Find or create user from Google profile - uses same findByEmail method
+      let user = await this.usersService.findByEmail(req.user.email);
+      
+      if (!user) {
+        console.log('👤 Creating new user from Google profile');
+        const randomPassword = await bcrypt.hash(Math.random().toString(36) + Date.now().toString(), 12);
+        
+        user = await this.usersService.create({
+          username: req.user.email.split('@')[0],
+          password: randomPassword,
+          email: req.user.email,
+        });
+        console.log('✅ New user created from Google OAuth');
+      } else {
+        console.log('✅ Existing user found for Google OAuth');
+      }
+
+      const payload = { 
+        username: (user as any).username, 
+        sub: (user as any).id 
+      };
+      
+      const access_token = this.jwtService.sign(payload);
+      
+      console.log('🎉 Google OAuth completed successfully');
+      
+      return {
+        access_token: access_token,
+        user: {
+          id: (user as any).id,
+          username: (user as any).username,
+          email: (user as any).email,
+          picture: req.user.picture,
+          name: `${req.user.firstName} ${req.user.lastName}`,
+        },
+        message: 'Google OAuth successful!'
+      };
+    } catch (error) {
+      console.error('❌ Google OAuth error:', error);
+      return { error: 'Failed to process Google login' };
+    }
   }
 }
