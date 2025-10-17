@@ -1,37 +1,23 @@
-:root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #0f0f0f;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import "tailwindcss";
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-/* Custom utility classes for glassmorphism with Safari support */
+/* Glassmorphism utilities tuned to light UI */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .glass-dark {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.gradient-bg {
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+/* Aurora backdrop for auth screens */
+.aurora-bg {
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(135, 206, 235, 0.35), transparent 60%),
+              radial-gradient(1000px 500px at 80% 20%, rgba(59, 130, 246, 0.35), transparent 60%),
+              linear-gradient(135deg, #0b132b 0%, #1c2541 50%, #1b2a49 100%);
 }
