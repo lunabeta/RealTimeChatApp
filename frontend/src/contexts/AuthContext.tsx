@@ -15,6 +15,7 @@ type AuthContextValue = {
   login: (email: string, password: string) => Promise<void>
   register: (name: string, email: string, password: string) => Promise<void>
   logout: () => Promise<void>
+  setUser: (user: AuthUser | null) => void
   googleLoginUrl: string
 }
 
@@ -41,15 +42,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [bootstrap])
 
   const login = useCallback(async (email: string, password: string) => {
-    await loginRequest(email, password)
-    const me = await getMe()
-    setUser(me)
+    const response = await loginRequest(email, password)
+    // Store user data in localStorage
+    localStorage.setItem('user_data', JSON.stringify(response.user))
+    setUser(response.user)
   }, [])
 
   const register = useCallback(async (name: string, email: string, password: string) => {
-    await registerRequest(name, email, password)
-    const me = await getMe()
-    setUser(me)
+    const response = await registerRequest(name, email, password)
+    // Store user data in localStorage
+    localStorage.setItem('user_data', JSON.stringify(response.user))
+    setUser(response.user)
   }, [])
 
   const logout = useCallback(async () => {
@@ -57,7 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null)
   }, [])
 
-  const googleLoginUrl = useMemo(() => "/api/auth/google", [])
+  const googleLoginUrl = useMemo(() => "http://localhost:3000/auth/google", [])
 
   const value: AuthContextValue = {
     user,
@@ -65,6 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     login,
     register,
     logout,
+    setUser,
     googleLoginUrl,
   }
 

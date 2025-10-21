@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpCode, HttpStatus, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, HttpStatus, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -30,8 +30,12 @@ export class AuthController {
 
   @Get('google/callback') 
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@Req() req) {
+  async googleAuthRedirect(@Req() req, @Res() res) {
     console.log('📨 Google OAuth callback received');
-    return this.authService.googleLogin(req);
+    const result = await this.authService.googleLogin(req);
+    
+    // Redirect to frontend with token and user data
+    const frontendUrl = `http://localhost:5173/auth/google/callback?token=${result.access_token}&user=${encodeURIComponent(JSON.stringify(result.user))}`;
+    res.redirect(frontendUrl);
   }
 }

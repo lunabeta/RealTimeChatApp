@@ -10,6 +10,8 @@ import LoginPage from "./pages/auth/LoginPage"
 import RegisterPage from "./pages/auth/RegisterPage"
 import OAuthCallback from "./pages/auth/OAuthCallback"
 import ChatPage from "./pages/chat/ChatPage"
+import CRUDDemo from "./pages/CRUDDemo"
+import AuthDemo from "./pages/AuthDemo"
 import ProtectedRoute from "./components/layout/ProtectedRoute"
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
       <SocketProvider>
         <ChatProvider>
           <Routes>
+            <Route path="/demo" element={<AuthDemo />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/auth/google/callback" element={<OAuthCallback />} />
@@ -43,6 +46,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ChatPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/crud"
+              element={
+                <ProtectedRoute>
+                  <CRUDDemo />
                 </ProtectedRoute>
               }
             />

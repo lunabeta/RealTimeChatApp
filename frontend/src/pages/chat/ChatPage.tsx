@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react"
+import { Link } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 import { useChat } from "../../contexts/ChatContext"
 import { useSocket } from "../../contexts/SocketContext"
-import { LogOut, MessageSquare, Send, Users } from "lucide-react"
+import { LogOut, MessageSquare, Send, Users, Database } from "lucide-react"
 
 export default function ChatPage() {
   const { user, logout } = useAuth()
@@ -18,6 +19,9 @@ export default function ChatPage() {
           <span className="font-semibold text-slate-800">Realtime Chat</span>
         </div>
         <div className="flex items-center gap-3">
+          <Link to="/crud" className="glass-dark px-3 py-2 rounded-lg inline-flex items-center gap-2 hover:bg-blue-100">
+            <Database className="w-4 h-4" /> CRUD Demo
+          </Link>
           <img src={user?.avatarUrl ?? `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(user?.name ?? "U")}`} className="w-8 h-8 rounded-full" />
           <button onClick={() => logout()} className="glass-dark px-3 py-2 rounded-lg inline-flex items-center gap-2">
             <LogOut className="w-4 h-4" /> Logout
