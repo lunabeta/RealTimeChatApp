@@ -1,202 +1,141 @@
-<<<<<<< HEAD
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Realtime Chat Application 💬
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
-```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-=======
-# ⚛️ Vite React Counter App with Docker 🐳
-
-This project is a simple yet effective counter application built with React and Vite, containerized using Docker for easy setup and deployment. It demonstrates a basic frontend setup with hot reloading and dependency management, showcasing a modern development workflow. The application increments a counter on button clicks, providing a hands-on example of React state management.
+This project is a full-stack realtime chat application built with React, TypeScript, Vite, Socket.IO, and other modern technologies. It allows users to communicate with each other in real-time through text messages. The application features user authentication, chat rooms, online user presence, and a clean, intuitive user interface. It solves the problem of needing a modern, scalable, and feature-rich chat application.
 
 ## 🚀 Key Features
 
-- **React Components:** Utilizes React components and JSX syntax for building the user interface.
-- **Vite Build Tool:** Configured with Vite for fast development and optimized production builds.
-- **Hot Reloading:** Implements hot reloading for a smooth development experience.
-- **Dockerized:** Containerized with Docker for easy setup and deployment across different environments.
-- **Real-time Communication:** Includes `socket.io-client` for potential real-time features (though not explicitly used in the counter logic).
-- **ESLint Integration:** Uses ESLint for code linting and maintaining code quality.
+- **Realtime Messaging:** Send and receive messages instantly using WebSockets.
+- **User Authentication:** Secure user registration and login.
+- **Chat Rooms:** Create and join different chat rooms for organized conversations.
+- **Online User Presence:** See which users are currently online.
+- **React Frontend:** Modern and responsive user interface built with React.
+- **TypeScript:** Enhanced code quality and maintainability with TypeScript.
+- **Vite Build Tool:** Fast and efficient development experience with Vite.
+- **State Management:** Zustand for managing frontend state.
+- **Routing:** React Router for navigation.
+- **Context Providers:** Auth, Socket, and Chat contexts for managing application state.
+- **Protected Routes:** Ensure only authenticated users can access certain pages.
 
 ## 🛠️ Tech Stack
 
-- **Frontend:**
-    - React
-    - React DOM
-    - Vite
-    - JavaScript (ES6+)
-    - CSS
-- **Development Tools:**
-    - ESLint
-    - `@vitejs/plugin-react`
-- **Containerization:**
-    - Docker
-    - Docker Compose
-- **Other:**
-    - `socket.io-client`
+*   **Frontend:**
+    *   React
+    *   TypeScript
+    *   Vite
+    *   React Router DOM
+    *   Zustand
+    *   Axios
+    *   Socket.IO Client
+    *   Lucide React
+    *   Tailwind CSS
+    *   PostCSS
+    *   Autoprefixer
+*   **Backend:** (No specific backend files provided, assuming Node.js with Express)
+    *   Node.js
+    *   Express
+    *   Socket.IO
+*   **Linting/Formatting:**
+    *   ESLint
+    *   Prettier
+*   **Other:**
+    *   package.json (npm)
 
 ## 📦 Getting Started
 
+Follow these steps to get the project up and running on your local machine.
+
 ### Prerequisites
 
-- Node.js and npm installed
-- Docker and Docker Compose installed
+- Node.js (>=18)
+- npm (>=8)
 
 ### Installation
 
-1.  Clone the repository:
+1.  **Clone the repository:**
 
     ```bash
     git clone <repository_url>
-    cd <repository_directory>
+    cd realtime-chat-app
     ```
 
-2.  Navigate to the frontend directory:
-
-    ```bash
-    cd frontend
-    ```
-
-3.  Install frontend dependencies:
+2.  **Install dependencies:**
 
     ```bash
     npm install
+    cd backend
+    npm install
+    cd ../frontend
+    npm install
+    cd ..
     ```
-
-4.  Return to the project root directory.
+    Alternatively, use the provided script:
+     ```bash
+    npm run install:all
+    ```
 
 ### Running Locally
 
-1.  Start the application using Docker Compose:
+1.  **Start the development servers:**
 
     ```bash
-    docker-compose up --build
+    npm run dev
     ```
 
-    This command builds and starts the database, backend, and frontend services.
+    This command will start both the backend and frontend development servers concurrently.  Make sure your backend is configured correctly and running on the expected port.
 
-2.  Access the frontend application in your browser at `http://localhost:3000`.
+2.  **Open the application in your browser:**
 
-## 💻 Usage
-
-Once the application is running, you can interact with the counter by clicking the button. The counter value will increment with each click. The frontend is set up for hot reloading, so any changes you make to the code will be reflected in the browser automatically.
+    Navigate to `http://localhost:5173` (or the port specified by your frontend configuration) to view the application.
 
 ## 📂 Project Structure
 
 ```
-├── docker-compose.yml
-├── frontend
-│   ├── package.json
-│   ├── vite.config.js
-│   ├── index.html
-│   ├── src
+realtime-chat-app/
+├── backend/
+│   ├── ... (Backend files - e.g., server.js, routes, models)
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   │   └── ... (Static assets)
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Auth.jsx
+│   │   │   ├── Chat.jsx
+│   │   │   └── layout/
+│   │   │       └── ProtectedRoute.tsx
+│   │   ├── contexts/
+│   │   │   ├── AuthContext.tsx
+│   │   │   ├── ChatContext.tsx
+│   │   │   └── SocketContext.tsx
+│   │   ├── pages/
+│   │   │   ├── auth/
+│   │   │   │   ├── LoginPage.jsx
+│   │   │   │   └── RegisterPage.jsx
+│   │   │   ├── chat/
+│   │   │   │   └── ChatPage.jsx
+│   │   │   ├── AuthDemo.jsx
+│   │   │   └── CRUDDemo.jsx
+│   │   ├── services/
+│   │   │   ├── api.js
+│   │   │   └── socket.js
 │   │   ├── App.jsx
-│   │   ├── main.jsx
+│   │   ├── App.tsx
+│   │   ├── main.tsx
 │   │   ├── index.css
-│   │   ├── App.css
-│   │   ├── assets
-│   │   │   ├── react.svg
-│   │   │   └── vite.svg
-│   └── ...
-├── ...
+│   │   ├── tsconfig.json
+│   │   └── ... (Other frontend files)
+│   ├── vite.config.js
+│   ├── eslint.config.js
+│   └── package.json
+├── eslint.config.mjs
+├── package.json
+├── test-connection.js
+└── ... (Other project files)
 ```
 
 ## 📸 Screenshots
 
-
+(Add screenshots of the application here to showcase its features and UI)
 
 ## 🤝 Contributing
 
@@ -206,16 +145,18 @@ Contributions are welcome! Please follow these steps:
 2.  Create a new branch for your feature or bug fix.
 3.  Make your changes and commit them with descriptive messages.
 4.  Push your changes to your fork.
-5.  Submit a pull request.
+5.  Submit a pull request to the main repository.
 
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ## 📬 Contact
 
-If you have any questions or suggestions, feel free to contact me at lunaworku@gmail.com.
+If you have any questions or suggestions, feel free to contact me at [your-email@example.com](mailto:your-email@example.com).
 
 ## 💖 Thanks
 
-Thank you for checking out this project! I hope it's helpful and provides a good starting point for your own React and Docker projects.
+Thank you for checking out this project! I hope it's helpful and that you enjoy using it.
 
-This README is written by [readme.ai](https://readme-generator-phi.vercel.app/), your go-to tool for generating beautiful README files.
->>>>>>> 888c1bf30423640b94c67ca419df4554ba562576
+This README was written by [readme.ai](https://readme-generator-phi.vercel.app/), your go-to tool for generating beautiful and informative README files.
